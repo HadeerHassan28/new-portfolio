@@ -37,7 +37,7 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <div className="bg-black min-h-screen">
-      <Header project={projectData} views={0} />
+      <Header project={projectData} />
       <ReportView slug={slug} />
 
       <article className="px-4 py-12 mx-auto max-w-7xl">
