@@ -5,14 +5,13 @@ import { Navigation } from "../../components/nav";
 import { Card } from "../../components/card";
 import { Article } from "./article";
 import { Redis } from "@upstash/redis";
-import { Eye } from "lucide-react";
 
 const redis = Redis.fromEnv();
 
 export const revalidate = 60;
 export default async function ProjectsPage() {
   let views: Record<string, number> = {};
-  
+
   try {
     const viewsData = await redis.mget<number[]>(
       ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":"))
@@ -21,9 +20,9 @@ export default async function ProjectsPage() {
       acc[allProjects[i].slug] = v ?? 0;
       return acc;
     }, {} as Record<string, number>);
-  } catch (error) {
+  } catch {
     // If Redis is not available, use default values
-    console.warn('Redis not available, using default view counts');
+    console.warn("Redis not available, using default view counts");
     views = allProjects.reduce((acc, project) => {
       acc[project.slug] = 0;
       return acc;
@@ -31,7 +30,9 @@ export default async function ProjectsPage() {
   }
 
   const featured = allProjects.find((project) => project.slug === "freshcart")!;
-  const top2 = allProjects.find((project) => project.slug === "blood-donation")!;
+  const top2 = allProjects.find(
+    (project) => project.slug === "blood-donation"
+  )!;
   const top3 = allProjects.find((project) => project.slug === "dashboard")!;
   const sorted = allProjects
     .filter((p) => p.published)
