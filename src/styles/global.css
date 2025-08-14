@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@layer base {
+  .text-edge-outline {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+  }
+}
+
+/* Typography styles for prose content */
+@layer components {
+  .prose-quoteless blockquote p:first-of-type::before {
+    content: none;
+  }
+  
+  .prose-quoteless blockquote p:first-of-type::after {
+    content: none;
+  }
+  
+  .prose code::before {
+    content: "";
+  }
+  
+  .prose code::after {
+    content: "";
+  }
+}
