@@ -7,12 +7,12 @@ export default function Home() {
   return (
     <div className="relative flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
       {/* Logo Background */}
-      <div 
-        className="absolute inset-0 bg-center bg-no-repeat bg-contain opacity-10 -z-20"
+      <div
+        className="absolute inset-0 bg-center bg-no-repeat bg-contain opacity-30 -z-20"
         style={{
-          backgroundImage: 'url(/logo2_2.png)',
-          backgroundSize: 'contain',
-          backgroundPosition: 'center',
+          backgroundImage: "url(/logo2_2.png)",
+          backgroundSize: "contain",
+          backgroundPosition: "center",
         }}
       />
       <nav className="my-16 animate-fade-in">
@@ -39,7 +39,13 @@ export default function Home() {
 
       <div className="hidden w-screen h-px md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
       <div className="my-16 text-center animate-fade-in">
-        <h2 className="text-sm text-zinc-500 ">Frontend Developer</h2>
+        <h2 className="text-3xl text-zinc-500 mb-2">Frontend Developer</h2>
+        <p className="text-lg text-zinc-400 max-w-2xl mx-auto px-4 leading-relaxed">
+          Crafting exceptional digital experiences with modern web technologies.
+          <br className="hidden sm:block" />
+          Transforming ideas into interactive, responsive, and user-centric
+          applications.
+        </p>
       </div>
     </div>
   );
