@@ -11,18 +11,28 @@ const redis = Redis.fromEnv();
 
 export const revalidate = 60;
 export default async function ProjectsPage() {
-  const views = (
-    await redis.mget<number[]>(
+  let views: Record<string, number> = {};
+  
+  try {
+    const viewsData = await redis.mget<number[]>(
       ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":"))
-    )
-  ).reduce((acc, v, i) => {
-    acc[allProjects[i].slug] = v ?? 0;
-    return acc;
-  }, {} as Record<string, number>);
+    );
+    views = viewsData.reduce((acc, v, i) => {
+      acc[allProjects[i].slug] = v ?? 0;
+      return acc;
+    }, {} as Record<string, number>);
+  } catch (error) {
+    // If Redis is not available, use default values
+    console.warn('Redis not available, using default view counts');
+    views = allProjects.reduce((acc, project) => {
+      acc[project.slug] = 0;
+      return acc;
+    }, {} as Record<string, number>);
+  }
 
-  const featured = allProjects.find((project) => project.slug === "unkey")!;
-  const top2 = allProjects.find((project) => project.slug === "planetfall")!;
-  const top3 = allProjects.find((project) => project.slug === "highstorm")!;
+  const featured = allProjects.find((project) => project.slug === "freshcart")!;
+  const top2 = allProjects.find((project) => project.slug === "blood-donation")!;
+  const top3 = allProjects.find((project) => project.slug === "dashboard")!;
   const sorted = allProjects
     .filter((p) => p.published)
     .filter(
@@ -45,9 +55,9 @@ export default async function ProjectsPage() {
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Projects
           </h2>
-          <p className="mt-4 text-zinc-400">
+          {/* <p className="mt-4 text-zinc-400">
             Some of the projects are from work and some are on my own time.
-          </p>
+          </p> */}
         </div>
         <div className="w-full h-px bg-zinc-800" />
 
@@ -67,12 +77,12 @@ export default async function ProjectsPage() {
                       <span>SOON</span>
                     )}
                   </div>
-                  <span className="flex items-center gap-1 text-xs text-zinc-500">
+                  {/* <span className="flex items-center gap-1 text-xs text-zinc-500">
                     <Eye className="w-4 h-4" />{" "}
                     {Intl.NumberFormat("en-US", { notation: "compact" }).format(
                       views[featured.slug] ?? 0
                     )}
-                  </span>
+                  </span> */}
                 </div>
 
                 <h2
