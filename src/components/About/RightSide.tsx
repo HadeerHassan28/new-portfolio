@@ -67,9 +67,11 @@ export default function RightSide() {
       >
         <Link
           href={
-            "https://drive.google.com/file/d/1Loi6EdxV_2AUy5soby91K3CUE-l3I3vz/view?usp=sharing"
+            "https://drive.google.com/file/d/1IdG1BCw-4jVCc8B92fY60uKASy9i_Iay/view?usp=sharing"
           }
           className="inline-block px-8 py-3 bg-black text-white border border-white font-semibold rounded-lg hover:bg-white/90 transition-all duration-300 transform hover:scale-105 hover:text-black "
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Download Resume
         </Link>
