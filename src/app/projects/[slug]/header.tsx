@@ -2,6 +2,7 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { ViewCounter } from "./view-counter";
 
 type Props = {
   project: {
@@ -10,10 +11,9 @@ type Props = {
     description: string;
     repository?: string;
   };
-
-  // views: number;
+  slug: string;
 };
-export const Header: React.FC<Props> = ({ project }) => {
+export const Header: React.FC<Props> = ({ project, slug }) => {
   const ref = useRef<HTMLElement>(null);
   const [isIntersecting, setIntersecting] = useState(true);
 
@@ -75,6 +75,8 @@ export const Header: React.FC<Props> = ({ project }) => {
               {project.description}
             </p>
           </div>
+
+          <ViewCounter slug={slug} />
 
           <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
             <div className="grid grid-cols-1 gap-y-6 gap-x-8 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
